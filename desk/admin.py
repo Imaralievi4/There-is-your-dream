@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Post, PostImage, Comment
+from .models import Categories, Post, PostImage, Comment
 
 
 class ImageInLine(admin.TabularInline):
@@ -17,6 +17,6 @@ class PostAdmin(admin.ModelAdmin):
     list_display_links = ('uuid', 'title')
 
 
-admin.site.register(Category)
+admin.site.register(Categories)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)

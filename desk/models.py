@@ -14,7 +14,7 @@ def gen_slug(s):
     return slug + '-' + str(int(time()))
 
 
-class Category(models.Model):
+class Categories(models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, primary_key=True, blank=True)
     parent = models.ForeignKey('self',
@@ -42,7 +42,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Categories)
 
     def __str__(self):
         return self.title

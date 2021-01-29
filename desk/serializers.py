@@ -1,15 +1,15 @@
 from rest_framework import serializers
 
-from .models import Post, Category, Comment
+from .models import Post, Categories, Comment
 from account.models import User
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Category
+        model = Categories
         fields = "__all__"
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentsSerializer(serializers.ModelSerializer):
     author = serializers.CharField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     product = serializers.PrimaryKeyRelatedField(
@@ -41,7 +41,7 @@ class PostSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['image'] = self._get_image_url(instance)
-        representation['categories'] = CategorySerializer(instance.categories.all(), many=True).data
+        representation['categories'] = CategoriesSerializer(instance.categories.all(), many=True).data
         representation['comments'] = CommentSerializer(instance.comment.all(), many=True).data
         return representation
 
@@ -66,7 +66,7 @@ class PostListSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         representation['image'] = self._get_image_url(instance)
-        representation['categories'] = CategorySerializer(instance.categories.all(), many=True).data
+        representation['categories'] = CategoriesSerializer(instance.categories.all(), many=True).data
         return representation
 
 

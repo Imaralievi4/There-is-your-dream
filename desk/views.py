@@ -8,9 +8,9 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
 from .filters import PostFilter
-from .models import Post, Category, Comment
-from .serializers import PostSerializer, CategorySerializer, \
-    CreateUpdatePostSerializer, CommentSerializer, PostListSerializer
+from .models import Post, Categories, Comment
+from .serializers import PostSerializer, CategoriesSerializer, \
+    CreateUpdatePostSerializer, CommentsSerializer, PostListSerializer
 
 
 class MyPagination(PageNumberPagination):
@@ -18,8 +18,8 @@ class MyPagination(PageNumberPagination):
 
 
 class CategoriesList(ListAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    queryset = Categories.objects.all()
+    serializer_class = CategoriesSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -59,7 +59,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 class CommentCreate(CreateAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = CommentsSerializer
     permission_classes = [p.IsAuthenticated]
 
     def perform_create(self, serializer):

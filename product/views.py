@@ -14,6 +14,7 @@ from .serializers import ProductSerializer, CategorySerializer, \
     CreateUpdateProductSerializer, CommentSerializer, ProductListSerializer
 
 
+
 class MyPagination(PageNumberPagination):
     page_size = 5
 
@@ -53,7 +54,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
+    
 class CommentCreate(CreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer

@@ -7,6 +7,7 @@ from .views import CategoriesList, ProductViewSet, CommentCreate
 router = DefaultRouter()
 router.register('', ProductViewSet)
 
+
 urlpatterns = [
     path('categories/', CategoriesList.as_view()),
     path('', include(router.urls)),

@@ -7,6 +7,8 @@ from django.db import models
 from pytils.translit import slugify
 
 
+User = get_user_model()
+
 def gen_slug(s):
     slug = slugify(s)
     return slug + '-' + str(int(time()))
@@ -35,6 +37,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     uuid = models.UUIDField(primary_key=True, blank=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -65,7 +68,7 @@ class Comment(models.Model):
     )
     text = models.TextField(max_length=400)
     author = models.ForeignKey(
-        get_user_model(),
+        User,
         on_delete=models.CASCADE,
         related_name='comment'
     )

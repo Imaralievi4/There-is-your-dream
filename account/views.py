@@ -56,3 +56,4 @@ class ProfileViewSet(mixins.RetrieveModelMixin,
     """User profile viewset for retrive and update"""
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerAccount]

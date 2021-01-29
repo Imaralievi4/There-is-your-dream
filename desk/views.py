@@ -7,7 +7,6 @@ from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-
 from .filters import PostFilter
 from .models import Post, Category, Comment
 from .serializers import PostSerializer, CategorySerializer, \
@@ -42,6 +41,10 @@ class PostViewSet(viewsets.ModelViewSet):
         else:
             permissions = [p.IsAuthenticated]
         return [permission() for permission in permissions]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
     @action(methods=['get'], detail=False)
     def search(self, request):

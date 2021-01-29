@@ -59,16 +59,11 @@ class ProductImage(models.Model):
 
 
 class Comment(models.Model):
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE,
-        related_name='comments'
-    )
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField(max_length=400)
-    author = models.ForeignKey(
-        get_user_model(),
+    author = models.ForeignKey(get_user_model(),
         on_delete=models.CASCADE,
-        related_name='comments'
-    )
+        related_name='comments')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

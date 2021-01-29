@@ -12,9 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.CharField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
-    product = serializers.PrimaryKeyRelatedField(
-        queryset=Product.objects.all(), write_only=True
-    )
+    product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all(), write_only=True)
 
     class Meta:
         model = Comment
